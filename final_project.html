@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Geography Story</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styling */
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #444;
+        }
+        
+        header {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+            animation: slideInFromTop 1s ease-out;
+        }
+        
+        header .header-content h1 {
+            font-size: 3rem;
+            margin: 0;
+            animation: fadeIn 2s;
+        }
+        
+        header .header-content p {
+            font-size: 1.5rem;
+            animation: fadeIn 2s 0.5s;
+        }
+        
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background: #2c3e50;
+            animation: slideInFromLeft 1s ease-out;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 15px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #1abc9c;
+            border-radius: 5px;
+            animation: bounce 0.5s;
+        }
+        
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+        
+        section:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        iframe {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: zoomIn 1s ease-out;
+        }
+        
+        .place-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px auto 0;
+            max-width: 1200px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s 0.5s forwards;
+        }
+        
+        .place-details .place {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .place-details .place:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+        
+        footer p {
+            margin: 0;
+            animation: fadeIn 2s;
+        }
+        /* Animations */
+        
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#places">Places</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+        <div class="header-content">
+            <h1>My Geography Story</h1>
+            <p>Exploring Ecology Through My Life in Hong Kong</p>
+        </div>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to My Project</h2>
+        <p>Discover how my geography and the theme of ecology have shaped my life and values.</p>
+    </section>
+
+    <section id="places">
+        <h2>Explore the Important Places</h2>
+        <p>This map showcases the locations in Hong Kong that have deeply influenced my ecological journey.</p>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1JBtFLxMP_BVY52QwXR8pkTO7vJ1fptw&usp=sharing" width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="place-details">
+            <div class="place">
+                <h3>Victoria Harbour</h3>
+                <p>A vital landmark reflecting the challenges of urban ecology and sustainability.</p>
+            </div>
+            <div class="place">
+                <h3>Tai Mo Shan</h3>
+                <p>The tallest peak in Hong Kong, inspiring an appreciation for nature and biodiversity.</p>
+            </div>
+            <div class="place">
+                <h3>Mai Po Nature Reserve</h3>
+                <p>A haven for migratory birds and a source of inspiration for wildlife conservation.</p>
+            </div>
+            <div class="place">
+                <h3>Lantau Island</h3>
+                <p>An ecological haven balancing development and environmental preservation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact">
+        <h2>Mutual Impact</h2>
+        <p>These places have helped me develop a deeper appreciation for sustainability and ecology. In return, I have contributed to these areas by promoting awareness and participating in conservation activities such as beach cleanups and wildlife protection
+            programs.</p>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>My name is [Your Name], and I am passionate about ecology and geography. Living in Hong Kong has given me opportunities to connect deeply with nature and explore the rich landscapes around me. Through this project, I aim to share my journey and
+            inspire others to reflect on their own connections to the environment.</p>
+    </section>
+
+    <footer>
+        <p>© 2024 My Geography Story | All Rights Reserved</p>
+    </footer>
+</body>
+
+</html>
