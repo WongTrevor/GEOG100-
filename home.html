@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Geography Through Ecology: A Personal Story</title>
+    <meta name="description" content="Discover the intricate relationship between human activities and the environment through an exploration of Hong Kong's ecological landscapes." />
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+         :root {
+            --navbar-height: 80px;
+            --primary-color: #00ffd5;
+            --secondary-color: #d1fef7;
+            --text-color: #ffffff;
+            --background-color: #0a0a0a;
+            --overlay-color: rgba(0, 0, 0, 0.8);
+            --card-background: #111111;
+            --transition-speed: 0.3s;
+            --font-size-large: 3rem;
+            --font-size-medium: 1.2rem;
+            --font-size-small: 1rem;
+            --max-content-width: 1200px;
+            --heading-shadow: 0px 0px 10px rgba(0, 255, 213, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        /* Navigation */
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: var(--overlay-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--navbar-height);
+        }
+        
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .hamburger.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active .bar2 {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        /* Banner */
+        
+        .banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            margin-top: var(--navbar-height);
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.7));
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/banner-ecology.jpg') center/cover no-repeat;
+            filter: brightness(40%) blur(2px);
+            z-index: -1;
+            transition: filter 0.5s ease;
+        }
+        
+        .banner:hover::before {
+            filter: brightness(50%) blur(1px);
+        }
+        
+        .banner-text {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 1rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .banner-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: var(--font-size-large);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .banner-text p {
+            font-size: var(--font-size-medium);
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .banner-text .cta-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background-color: #00e6b8;
+            transform: perspective(500px) rotateY(15deg);
+        }
+        /* Project Overview Cards Section */
+        
+        .cards-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .cards-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        /* Updated Layout: 4 columns with equal width and uniform card sizes */
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            justify-items: stretch;
+            align-items: stretch;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        
+        .key-card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--secondary-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease, box-shadow 0.3s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .key-card:hover {
+            transform: rotateY(10deg);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+        }
+        
+        .key-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-shadow: var(--heading-shadow);
+            font-size: 1.4rem;
+        }
+        
+        .key-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            color: var(--primary-color);
+        }
+        
+        .key-card p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #c3f9f2;
+            flex-grow: 1;
+        }
+        
+        .key-card ul {
+            text-align: left;
+            margin: 1rem auto 0;
+            font-size: 0.95rem;
+            padding-left: 1.2rem;
+            color: #c3f9f2;
+        }
+        
+        .key-card ul li {
+            margin-bottom: 0.5rem;
+            list-style: inside disc;
+        }
+        /* Narrative Section */
+        
+        .narrative-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            color: var(--secondary-color);
+            text-align: center;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .narrative-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .narrative-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+        
+        .narrative-card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .narrative-card:hover {
+            transform: rotateY(-10deg);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+        }
+        
+        .narrative-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .narrative-card p {
+            font-size: 1.05rem;
+            color: #c3f9f2;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        /* Interactive Map Section */
+        
+        .interactive-map-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            background-color: #0e0e0e;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .interactive-map-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            text-shadow: var(--heading-shadow);
+            display: inline-block;
+        }
+        
+        .interactive-map-section p {
+            max-width: 800px;
+            margin: 1rem auto 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        
+        .map-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .map-container {
+            position: relative;
+            width: 80%;
+            padding-bottom: 40%;
+            height: 0;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .map-container:hover {
+            transform: rotateY(10deg);
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .map-container:hover iframe {
+            transform: scale(1.05);
+        }
+        /* Highlights */
+        
+        .project-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            color: var(--secondary-color);
+            text-align: center;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .project-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .top-row-card {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            width: 100%;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .top-row-card:hover {
+            transform: rotateY(10deg);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+        }
+        
+        .top-row-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .top-row-card strong {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+            display: block;
+        }
+        
+        .top-row-card p {
+            font-size: 1rem;
+            color: #c3f9f2;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        
+        .second-row-container {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+        }
+        
+        .bottom-row-card {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            width: 300px;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .bottom-row-card:hover {
+            transform: rotateY(10deg);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+        }
+        
+        .bottom-row-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .bottom-row-card strong {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+            display: block;
+        }
+        
+        .bottom-row-card p {
+            font-size: 1rem;
+            color: #c3f9f2;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        /* Contact Section */
+        
+        .contact-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .contact-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #b2ebf2;
+        }
+        
+        .contact-form button {
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+        
+        .contact-form button:hover {
+            background-color: #00e6b8;
+        }
+        /* Footer */
+        
+        footer {
+            background: var(--overlay-color);
+            color: var(--primary-color);
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        /* Animations */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive */
+        
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+            .banner-text h1 {
+                font-size: 2.5rem;
+            }
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                display: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--transition-speed) ease;
+            }
+            .nav-links.active {
+                display: flex;
+                max-height: 300px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            /* Adjust Project Overview for smaller screens */
+            .cards-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner-text h1 {
+                font-size: 2rem;
+            }
+            .banner-text p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            /* Adjust Highlights Grid */
+            .highlights-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            .second-row-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .bottom-row-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Main Navigation">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="GeoStory Logo.jpg" alt="GeoStory Logo" loading="lazy" />
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home" class="home-link active" aria-current="page">Home</a></li>
+                    <li><a href="#about-project" class="about-link">Project Overview</a></li>
+                    <li><a href="#narrative" class="narrative-link">Narrative</a></li>
+                    <li><a href="#interactive-map" class="map-link">Interactive Map</a></li>
+                    <li><a href="#places" class="highlights-link">Highlights</a></li>
+                    <li><a href="#contact" class="contact-link">Contact</a></li>
+                </ul>
+                <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </button>
+            </div>
+        </nav>
+        <div class="banner" id="home">
+            <div class="banner-text animate__animated">
+                <h1>My Geography Through Ecology</h1>
+                <p>A personal journey uncovering the interplay between human activities & Hong Kong’s diverse environments.</p>
+                <a href="#about-project" class="cta-button">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Project Overview -->
+        <section id="about-project" class="cards-section">
+            <h2>Project Overview</h2>
+            <div class="cards-container">
+                <div class="key-card">
+                    <span class="icon">🌱</span>
+                    <h3>Focus</h3>
+                    <p>Understanding the synergy and tension between ecological systems and urbanization.</p>
+                    <ul>
+                        <li>Ecology & Urbanization</li>
+                        <li>Human-Environment Interactions</li>
+                    </ul>
+                </div>
+                <div class="key-card">
+                    <span class="icon">🔎</span>
+                    <h3>Approach</h3>
+                    <p>Fieldwork and sustainable frameworks guide our exploration of environmental challenges.</p>
+                    <ul>
+                        <li>Field Observations & Surveys</li>
+                        <li>Sustainable Practices & Solutions</li>
+                    </ul>
+                </div>
+                <div class="key-card">
+                    <span class="icon">🗺️</span>
+                    <h3>Tools</h3>
+                    <p>Utilizing spatial data and mapping technologies to visualize ecological changes over time.</p>
+                    <ul>
+                        <li>GIS & Remote Sensing</li>
+                        <li>Mapping Environmental Variations</li>
+                    </ul>
+                </div>
+                <div class="key-card">
+                    <span class="icon">🎯</span>
+                    <h3>Goal</h3>
+                    <p>Fostering awareness, inspiring conservation, and informing responsible urban planning decisions.</p>
+                    <ul>
+                        <li>Raise Environmental Awareness</li>
+                        <li>Encourage Conservation & Policy Actions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Narrative -->
+        <section id="narrative" class="narrative-section">
+            <h2>Narrative</h2>
+            <div class="narrative-cards">
+                <div class="narrative-card">
+                    <h3>Victoria Harbour</h3>
+                    <p>Where maritime commerce and pollution meet marine ecosystems. Efforts focus on reducing maritime pollution and understanding industrial impacts on biodiversity.</p>
+                </div>
+                <div class="narrative-card">
+                    <h3>Tai Mo Shan</h3>
+                    <p>High-altitude habitats showcase resilience. Observations highlight how species adapt amidst climate variability and urban encroachment.</p>
+                </div>
+                <div class="narrative-card">
+                    <h3>Mai Po Reserve</h3>
+                    <p>A critical wetland haven for migratory birds. Conservation emphasizes maintaining crucial habitats along avian flyways.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map Section -->
+        <section id="interactive-map" class="interactive-map-section">
+            <h2>Interactive Map</h2>
+            <p>Explore pivotal locations and gain a spatial perspective on how these areas are interconnected, shaping both environmental conditions and urban life.</p>
+            <div class="map-wrapper">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1JBtFLxMP_BVY52QwXR8pkTO7vJ1fptw&usp=sharing" allowfullscreen="" loading="lazy" title="Interactive Map of Ecological Journey"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlights -->
+        <section id="places" class="project-section">
+            <h2>Highlights</h2>
+            <div class="highlights-grid">
+                <!-- Top row: 3 cards -->
+                <div class="top-row-card">
+                    <img src="Victoria Harbour.jpeg" alt="Victoria Harbour Image" loading="lazy" />
+                    <strong>Victoria Harbour</strong>
+                    <p>Examines urban pollution, maritime traffic, and the health of marine species. Highlights the push for cleaner, sustainable maritime practices.</p>
+                </div>
+                <div class="top-row-card">
+                    <img src="Tai Mo Shan.jpeg" alt="Tai Mo Shan Image" loading="lazy" />
+                    <strong>Tai Mo Shan</strong>
+                    <p>Studies high-altitude biodiversity facing evolving climates. A testament to nature’s adaptability amid environmental stressors.</p>
+                </div>
+                <div class="top-row-card">
+                    <img src="Mai Po Reserve.jpeg" alt="Mai Po Nature Reserve Image" loading="lazy" />
+                    <strong>Mai Po Reserve</strong>
+                    <p>Focuses on wetlands and migratory birds. Underscores wetlands as key habitats requiring vigilant protection and careful management.</p>
+                </div>
+
+                <!-- Second row: 2 cards centered under the middle top card -->
+                <div class="second-row-container">
+                    <div class="bottom-row-card">
+                        <img src="Lantau Island.jpeg" alt="Lantau Island Image" loading="lazy" />
+                        <strong>Lantau Island</strong>
+                        <p>Addresses sustainable development in resource-rich but delicate ecosystems. Balances tourism, infrastructure, and habitat protection.</p>
+                    </div>
+                    <div class="bottom-row-card">
+                        <img src="Hong Kong Park.jpeg" alt="Hong Kong Park Image" loading="lazy" />
+                        <strong>Hong Kong Park</strong>
+                        <p>Shows the importance of green urban spaces for mental well-being, biodiversity support, and improved city resilience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact-section">
+            <h2>Get in Touch</h2>
+            <form class="contact-form" action="#" method="POST" novalidate>
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name" />
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email" />
+                <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 My Geography Story | All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/yourprofile" target="_blank" rel="noopener">GitHub</a>
+            <a href="mailto:youremail@example.com">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('#nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+            });
+
+            // Change Nav Background on Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.nav-container');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Places That Define My Geography</title>
+    <meta name="description" content="Explore the three pivotal locations that shape my geographical and ecological journey." />
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+         :root {
+            --navbar-height: 80px;
+            --primary-color: #00ffd5;
+            --secondary-color: #d1fef7;
+            --text-color: #ffffff;
+            --background-color: #0a0a0a;
+            --overlay-color: rgba(0, 0, 0, 0.8);
+            --card-background: #111111;
+            --transition-speed: 0.3s;
+            --font-size-large: 3rem;
+            --font-size-medium: 1.2rem;
+            --font-size-small: 1rem;
+            --max-content-width: 1200px;
+            --heading-shadow: 0px 0px 10px rgba(0, 255, 213, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        /* Navigation */
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: var(--overlay-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--navbar-height);
+        }
+        
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .hamburger.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active .bar2 {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        /* Banner */
+        
+        .banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            margin-top: var(--navbar-height);
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.7));
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/banner-ecology.jpg') center/cover no-repeat;
+            filter: brightness(40%) blur(2px);
+            z-index: -1;
+            transition: filter 0.5s ease;
+        }
+        
+        .banner:hover::before {
+            filter: brightness(50%) blur(1px);
+        }
+        
+        .banner-text {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 1rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .banner-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: var(--font-size-large);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .banner-text p {
+            font-size: var(--font-size-medium);
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .banner-text .cta-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background-color: #00e6b8;
+            transform: perspective(500px) rotateY(15deg);
+        }
+        /* Introduction Section */
+        
+        .introduction-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .introduction-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .introduction-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        /* Place Sections */
+        
+        .places-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            padding: 4rem 2rem;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .place-card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 15px;
+            color: var(--secondary-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease, box-shadow 0.3s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .place-card:hover {
+            transform: rotateY(10deg);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+        }
+        
+        .place-card img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .place-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .place-description {
+            text-align: left;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 1rem;
+        }
+        
+        .place-description p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            color: #c3f9f2;
+        }
+        
+        .map-iframe {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .map-iframe:hover {
+            transform: scale(1.05);
+        }
+        /* Conclusion Section */
+        
+        .conclusion-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        
+        .conclusion-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .conclusion-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        /* Footer */
+        
+        footer {
+            background: var(--overlay-color);
+            color: var(--primary-color);
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        /* Animations */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive */
+        
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+            .banner-text h1 {
+                font-size: 2.5rem;
+            }
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                display: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--transition-speed) ease;
+            }
+            .nav-links.active {
+                display: flex;
+                max-height: 300px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            /* Adjust Place Cards for smaller screens */
+            .place-card {
+                padding: 1.5rem;
+            }
+            .map-iframe {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner-text h1 {
+                font-size: 2rem;
+            }
+            .banner-text p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            /* Adjust Place Cards */
+            .place-card h3 {
+                font-size: 1.5rem;
+            }
+            .place-description p {
+                font-size: 0.95rem;
+            }
+            .map-iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Main Navigation">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="GeoStory Logo" loading="lazy" />
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="home-link" aria-current="page">Home</a></li>
+                    <li><a href="project-overview.html" class="about-link">Project Overview</a></li>
+                    <li><a href="narrative.html" class="narrative-link">Narrative</a></li>
+                    <li><a href="interactive-map.html" class="map-link">Interactive Map</a></li>
+                    <li><a href="places.html" class="highlights-link active">Highlights</a></li>
+                    <li><a href="contact.html" class="contact-link">Contact</a></li>
+                </ul>
+                <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Introduction Section -->
+        <section class="introduction-section">
+            <h2>The Places That Define My Geography</h2>
+            <p>
+                The places we inhabit shape our identities and actions. This section explores three locations central to my story, showcasing their unique geography and their impact on my journey.
+            </p>
+        </section>
+
+        <!-- Places Container -->
+        <section class="places-container">
+            <!-- Place 1: Victoria Harbour -->
+            <div class="place-card animate__animated">
+                <img src="Victoria Harbour.jpeg" alt="Victoria Harbour Image" loading="lazy" />
+                <h3>Victoria Harbour</h3>
+                <div class="place-description">
+                    <p><strong>Description:</strong></p>
+                    <p>
+                        Victoria Harbour is a hub for maritime trade and an iconic symbol of Hong Kong. It holds significant cultural and historical importance, serving as a gateway for international commerce. However, ecological concerns such as pollution from maritime traffic
+                        and ongoing conservation efforts pose challenges to its pristine beauty.
+                    </p>
+                    <p><strong>Your Impact:</strong></p>
+                    <p>
+                        I have actively participated in local beach cleanup initiatives, striving to reduce pollution and promote sustainable practices within the harbor.
+                    </p>
+                    <p><strong>Impact on You:</strong></p>
+                    <p>
+                        Engaging with Victoria Harbour has inspired me to advocate for sustainable maritime practices, deepening my commitment to environmental conservation.
+                    </p>
+                </div>
+                <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.855161325236!2d114.17090921480143!3d22.281999684940944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400c6f31f7b81%3A0xd3d05b7b1a7c2a3e!2sVictoria%20Harbour!5e0!3m2!1sen!2shk!4v1616613206393!5m2!1sen!2shk"
+                    allowfullscreen="" loading="lazy" title="Victoria Harbour Location"></iframe>
+            </div>
+
+            <!-- Place 2: Tai Mo Shan -->
+            <div class="place-card animate__animated">
+                <img src="Tai Mo Shan.jpeg" alt="Tai Mo Shan Image" loading="lazy" />
+                <h3>Tai Mo Shan</h3>
+                <div class="place-description">
+                    <p><strong>Description:</strong></p>
+                    <p>
+                        Tai Mo Shan, the highest peak in Hong Kong, holds ecological importance due to its diverse habitats and endemic species. However, challenges such as urban encroachment and climate change threaten its biodiversity, necessitating robust conservation efforts.
+                    </p>
+                    <p><strong>Your Impact:</strong></p>
+                    <p>
+                        As a volunteer, I have conducted biodiversity surveys in Tai Mo Shan, contributing to data collection and preservation strategies aimed at protecting its unique ecosystems.
+                    </p>
+                    <p><strong>Impact on You:</strong></p>
+                    <p>
+                        Visiting Tai Mo Shan has deepened my connection with nature, fostering a greater appreciation for biodiversity and reinforcing my commitment to environmental stewardship.
+                    </p>
+                </div>
+                <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4951490897126!2d114.2323252147994!3d22.37851868492569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040164e3c3e567%3A0x71a3b23c9b5f0c6c!2sTai%20Mo%20Shan%20Country%20Park!5e0!3m2!1sen!2shk!4v1616613262871!5m2!1sen!2shk"
+                    allowfullscreen="" loading="lazy" title="Tai Mo Shan Location"></iframe>
+            </div>
+
+            <!-- Place 3: Mai Po Reserve -->
+            <div class="place-card animate__animated">
+                <img src="Mai Po Reserve.jpeg" alt="Mai Po Reserve Image" loading="lazy" />
+                <h3>Mai Po Reserve</h3>
+                <div class="place-description">
+                    <p><strong>Description:</strong></p>
+                    <p>
+                        Mai Po Reserve is a critical wetland habitat for migratory birds, serving as a sanctuary for numerous species. Conservation efforts focus on preserving these wetlands amidst urban development pressures, highlighting the delicate balance between progress
+                        and ecological preservation.
+                    </p>
+                    <p><strong>Your Impact:</strong></p>
+                    <p>
+                        I have volunteered for bird observation projects at Mai Po Reserve, aiding in the monitoring of migratory patterns and contributing to ongoing conservation initiatives.
+                    </p>
+                    <p><strong>Impact on You:</strong></p>
+                    <p>
+                        My involvement with Mai Po Reserve has taught me the fragility of ecosystems and the importance of vigilant preservation efforts to maintain biodiversity.
+                    </p>
+                </div>
+                <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.0206807664124!2d114.15211821480028!3d22.47277598490766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404017fda152cfd%3A0xc8b1e0d6e1c0a2b2!2sMai%20Po%20Nature%20Reserve!5e0!3m2!1sen!2shk!4v1616613306541!5m2!1sen!2shk"
+                    allowfullscreen="" loading="lazy" title="Mai Po Reserve Location"></iframe>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="conclusion-section">
+            <h2>Conclusion</h2>
+            <p>
+                These three places collectively define my geography, intertwining cultural heritage, ecological diversity, and personal growth. Each location has profoundly influenced my journey, fostering a deep appreciation for the intricate balance between human activities
+                and the natural world. As I continue to explore and advocate for sustainable practices, the interconnectivity of these places inspires my commitment to preserving our planet's rich ecological tapestry.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 My Geography Story | All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/yourprofile" target="_blank" rel="noopener">GitHub</a>
+            <a href="mailto:youremail@example.com">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('#nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+            });
+
+            // Change Nav Background on Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.nav-container');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interconnectivity and Geography Concepts</title>
+    <meta name="description" content="Explore the interconnectivity between key places and the geographical concepts that shape them." />
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-e5d9383e476ce5b8285bad190e9a47f7f4bd3e6066edbf889083f1c7e5c51ddf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+         :root {
+            --navbar-height: 80px;
+            --primary-color: #00ffd5;
+            --secondary-color: #d1fef7;
+            --text-color: #ffffff;
+            --background-color: #0a0a0a;
+            --overlay-color: rgba(0, 0, 0, 0.8);
+            --card-background: rgba(0, 0, 0, 0.7);
+            --transition-speed: 0.3s;
+            --font-size-large: 3rem;
+            --font-size-medium: 1.2rem;
+            --font-size-small: 1rem;
+            --max-content-width: 1200px;
+            --heading-shadow: 0px 0px 10px rgba(0, 255, 213, 0.8);
+            --card-hover-transform: rotateY(10deg);
+            --card-hover-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+            --button-hover-bg: #00e6b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        /* Navigation */
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: var(--overlay-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--navbar-height);
+            transition: background-color var(--transition-speed) ease;
+        }
+        
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .hamburger.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active .bar2 {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        /* Banner */
+        
+        .banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            margin-top: var(--navbar-height);
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.7));
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/banner-ecology.jpg') center/cover no-repeat;
+            filter: brightness(40%) blur(2px);
+            z-index: -1;
+            transition: filter 0.5s ease;
+        }
+        
+        .banner:hover::before {
+            filter: brightness(50%) blur(1px);
+        }
+        
+        .banner-text {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 1rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .banner-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: var(--font-size-large);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .banner-text p {
+            font-size: var(--font-size-medium);
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .banner-text .cta-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--button-hover-bg);
+            transform: perspective(500px) rotateY(15deg);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+        }
+        /* Introduction Section */
+        
+        .introduction-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .introduction-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .introduction-section p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        /* Interconnectivity Section */
+        
+        .interconnectivity-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .interconnectivity-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .interconnectivity-section .relationships {
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c3f9f2;
+            /* Changed background to neutral dark */
+            background: rgba(50, 50, 50, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            position: relative;
+            transform: perspective(1000px);
+        }
+        
+        .interconnectivity-section .relationships:hover {
+            background: rgba(70, 70, 70, 0.8);
+            transform: rotateY(5deg);
+        }
+        
+        .interconnectivity-section .relationships h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .interconnectivity-section .diagram {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .interconnectivity-section .diagram img {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .interconnectivity-section .diagram img:hover {
+            transform: scale(1.05) rotateZ(5deg);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+        }
+        
+        .interconnectivity-section .diagram-description {
+            max-width: 900px;
+            margin: 1rem auto 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c3f9f2;
+            background: rgba(50, 50, 50, 0.8);
+            /* Changed background */
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            position: relative;
+            transform: perspective(1000px);
+        }
+        
+        .interconnectivity-section .diagram-description:hover {
+            background: rgba(70, 70, 70, 0.8);
+            transform: rotateY(-5deg);
+        }
+        /* Geography Concepts Section */
+        
+        .geography-concepts-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .geography-concepts-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .geography-concepts-section .concept-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .concept-card {
+            background: rgba(50, 50, 50, 0.8);
+            /* Changed background */
+            padding: 2rem;
+            border-radius: 15px;
+            color: var(--secondary-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease, box-shadow 0.3s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .concept-card:hover {
+            transform: perspective(1000px) rotateY(10deg) rotateX(5deg) scale(1.05);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(0, 255, 213, 0.3), rgba(0, 255, 213, 0));
+            transition: transform 0.6s ease;
+            z-index: 0;
+        }
+        
+        .concept-card:hover::before {
+            transform: rotate(90deg);
+        }
+        
+        .concept-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .concept-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #c3f9f2;
+            position: relative;
+            z-index: 1;
+        }
+        /* Personal Growth and Reflection Section */
+        
+        .personal-growth-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .personal-growth-section p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+            background: rgba(50, 50, 50, 0.8);
+            /* Changed background */
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            position: relative;
+            transform: perspective(1000px);
+        }
+        
+        .personal-growth-section p:hover {
+            background: rgba(70, 70, 70, 0.8);
+            transform: rotateY(5deg);
+        }
+        
+        .personal-growth-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        /* Conclusion Section */
+        
+        .conclusion-section {
+            background-color: #0e0e0e;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .conclusion-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .conclusion-section p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+            background: rgba(50, 50, 50, 0.8);
+            /* Changed background */
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+            position: relative;
+            transform: perspective(1000px);
+        }
+        
+        .conclusion-section p:hover {
+            background: rgba(70, 70, 70, 0.8);
+            transform: rotateY(-5deg);
+        }
+        /* Footer */
+        
+        footer {
+            background: var(--overlay-color);
+            color: var(--primary-color);
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        /* Animations */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive */
+        
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+            .banner-text h1 {
+                font-size: 2.5rem;
+            }
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .geography-concepts-section .concept-card {
+                padding: 1.5rem;
+            }
+            .interconnectivity-section .diagram img {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                display: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--transition-speed) ease;
+            }
+            .nav-links.active {
+                display: flex;
+                max-height: 300px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            /* Adjust Sections for smaller screens */
+            .interconnectivity-section .diagram {
+                flex-direction: column;
+            }
+            .interconnectivity-section .diagram img {
+                max-width: 100%;
+            }
+            .concept-card {
+                padding: 1rem;
+            }
+            .geography-concepts-section .concept-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner-text h1 {
+                font-size: 2rem;
+            }
+            .banner-text p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            .concept-card h3 {
+                font-size: 1.5rem;
+            }
+            .concept-card p {
+                font-size: 0.95rem;
+            }
+            .interconnectivity-section .diagram img {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Main Navigation">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="GeoStory Logo" loading="lazy" />
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="home-link">Home</a></li>>
+                    <li><a href="narrative.html" class="narrative-link">Narrative</a></li>
+                    <li><a href="interactive-map.html" class="map-link">Interactive Map</a></li>
+                    <li><a href="interconnectivity.html" class="interconnectivity-link active">Interconnectivity</a></li>
+                    <li><a href="contact.html" class="contact-link">Contact</a></li>
+                </ul>
+                <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </button>
+            </div>
+        </nav>
+        <div class="banner" id="interconnectivity">
+            <div class="banner-text animate__animated">
+                <h1>Interconnectivity and Geography Concepts</h1>
+                <p>Exploring the relationships and geographical principles that bind key places together.</p>
+                <a href="#introduction" class="cta-button">Discover More</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Introduction Section -->
+        <section id="introduction" class="introduction-section animate__animated">
+            <h2><i class="fas fa-map-marked-alt"></i> Interconnectivity and Geography Concepts</h2>
+            <p>
+                The connections between Victoria Harbour, Tai Mo Shan, and Mai Po Reserve are rooted in the themes of ecology and human geography. This section explores their interdependence and how they shape my understanding of spatial interaction, sustainability,
+                and cultural landscapes.
+            </p>
+        </section>
+
+        <!-- Interconnectivity Section -->
+        <section class="interconnectivity-section animate__animated">
+            <h2><i class="fas fa-network-wired"></i> Interconnectivity</h2>
+            <div class="relationships">
+                <h3><i class="fas fa-handshake"></i> Discuss the Relationships</h3>
+                <p>
+                    Victoria Harbour, Tai Mo Shan, and Mai Po Reserve are interconnected through their geographical, ecological, and cultural ties. Tai Mo Shan’s water systems feed into the wetlands at Mai Po Reserve, which are vital for biodiversity in Victoria Harbour.
+                    This natural flow supports both ecological balance and the economic activities centered around the harbour.
+                </p>
+            </div>
+            <div class="diagram">
+                <img src="interconnectivity.jpg" alt="Interconnectivity Diagram" loading="lazy" />
+            </div>
+            <div class="diagram-description">
+                <p><i class="fas fa-water"></i> The diagram illustrates the flow of water from Tai Mo Shan’s streams into Mai Po Reserve wetlands, which in turn support the rich marine life in Victoria Harbour. This interconnected system highlights the dependency
+                    of urban maritime activities on the health of surrounding natural ecosystems.
+                </p>
+            </div>
+        </section>
+
+        <!-- Geography Concepts Section -->
+        <section class="geography-concepts-section animate__animated">
+            <h2><i class="fas fa-globe"></i> Geography Concepts</h2>
+
+            <div class="concept-cards">
+                <!-- Spatial Interaction -->
+                <div class="concept-card">
+                    <h3><i class="fas fa-exchange-alt"></i> Spatial Interaction</h3>
+                    <p>
+                        Spatial interaction refers to the movement of goods, ideas, and people between places. In this context, maritime trade at Victoria Harbour relies on the natural resources preserved in Tai Mo Shan and Mai Po Reserve. The flow of goods and services is facilitated
+                        by the clean water systems and healthy ecosystems that support marine life, which are essential for sustaining economic activities and cultural exchanges in the harbour.
+                    </p>
+                </div>
+
+                <!-- Cultural Landscapes -->
+                <div class="concept-card">
+                    <h3><i class="fas fa-landmark"></i> Cultural Landscapes</h3>
+                    <p>
+                        Cultural landscapes are the result of the interaction between humans and their environment. The urbanization around Victoria Harbour has transformed the natural landscapes of Mai Po Reserve through increased pollution and habitat disruption. Conversely,
+                        the preservation efforts in Mai Po Reserve aim to mitigate these impacts, maintaining the balance between urban development and ecological sustainability.
+                    </p>
+                </div>
+
+                <!-- Sustainability -->
+                <div class="concept-card">
+                    <h3><i class="fas fa-leaf"></i> Sustainability</h3>
+                    <p>
+                        Sustainability involves maintaining a balance between human needs and environmental preservation. Conservation programs in Mai Po Reserve not only protect local biodiversity but also contribute to global wetland preservation efforts. These initiatives
+                        ensure that natural resources continue to support both ecological systems and human economic activities, fostering long-term environmental health.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Growth and Reflection Section -->
+        <section class="personal-growth-section animate__animated">
+            <h2><i class="fas fa-user-graduate"></i> Personal Growth and Reflection</h2>
+            <p>
+                Studying the interconnectedness of Victoria Harbour, Tai Mo Shan, and Mai Po Reserve has profoundly deepened my understanding of geography. It has taught me the importance of collective action in preserving environmental ecosystems and the critical role
+                that sustainable practices play in maintaining the balance between urban development and natural preservation. This journey has reinforced my commitment to advocating for ecological awareness and sustainable urban planning.
+            </p>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="conclusion-section animate__animated">
+            <h2><i class="fas fa-flag-checkered"></i> Conclusion</h2>
+            <p>
+                Analyzing the interconnectivity between these three places has provided invaluable insights into the complex relationships that define our geographical landscapes. Understanding spatial interactions, cultural transformations, and sustainability efforts
+                highlights the necessity of integrated approaches in addressing environmental challenges. Moving forward, I envision a future where ecological awareness and sustainable practices are at the forefront of urban planning, ensuring that our
+                natural habitats thrive alongside human progress.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 My Geography Story | All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/yourprofile" target="_blank" rel="noopener">GitHub</a>
+            <a href="mailto:youremail@example.com">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('#nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+            });
+
+            // Change Nav Background on Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.nav-container');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for Animations
+            const animatedElements = document.querySelectorAll('.animate__animated');
+
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    <meta name="description" content="Get in touch with me for any inquiries or collaborations." />
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+         :root {
+            --navbar-height: 80px;
+            --primary-color: #00ffd5;
+            --secondary-color: #d1fef7;
+            --text-color: #ffffff;
+            --background-color: #0a0a0a;
+            --overlay-color: rgba(0, 0, 0, 0.8);
+            --card-background: rgba(255, 255, 255, 0.1);
+            --transition-speed: 0.3s;
+            --font-size-large: 3rem;
+            --font-size-medium: 1.2rem;
+            --font-size-small: 1rem;
+            --max-content-width: 1200px;
+            --heading-shadow: 0px 0px 10px rgba(0, 255, 213, 0.8);
+            --card-hover-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+            --button-hover-bg: #00e6b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        /* Navigation */
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: var(--overlay-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--navbar-height);
+            transition: background-color var(--transition-speed) ease;
+        }
+        
+        .nav-container.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .hamburger.active .bar1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active .bar2 {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                display: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--transition-speed) ease;
+            }
+            .nav-links.active {
+                display: flex;
+                max-height: 300px;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+        /* Banner */
+        
+        .banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            margin-top: var(--navbar-height);
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.7));
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/banner-contact.jpg') center/cover no-repeat;
+            filter: brightness(40%) blur(2px);
+            z-index: -1;
+            transition: filter 0.5s ease;
+        }
+        
+        .banner:hover::before {
+            filter: brightness(50%) blur(1px);
+        }
+        
+        .banner-text {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 1rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .banner-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: var(--font-size-large);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .banner-text p {
+            font-size: var(--font-size-medium);
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            line-height: 1.5;
+        }
+        /* Main */
+        
+        main {
+            padding: 4rem 2rem;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+        /* Introduction Section */
+        
+        .introduction-section {
+            background-color: rgba(0, 255, 213, 0.05);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .introduction-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .introduction-section p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        /* Personal Info Container */
+        
+        .personal-info-container {
+            text-align: center;
+            /* Improved background: a subtle gradient */
+            background: linear-gradient(135deg, rgba(0, 255, 213, 0.1), rgba(0, 255, 213, 0));
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+        }
+        
+        .personal-info-container::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at center, rgba(0, 255, 213, 0.15), transparent 60%);
+            z-index: 0;
+        }
+        
+        .personal-info-container h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .personal-info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .personal-card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--secondary-color);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .personal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .personal-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: var(--heading-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .personal-card h3 svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--primary-color);
+        }
+        
+        .personal-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #c3f9f2;
+        }
+        
+        .personal-card p a {
+            color: #c3f9f2;
+            text-decoration: underline;
+        }
+        /* Bio Section */
+        
+        .bio-section {
+            background-color: rgba(0, 255, 213, 0.05);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .bio-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .bio-section p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        /* Contact Form Section */
+        
+        .contact-form-section {
+            background-color: rgba(0, 255, 213, 0.05);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--secondary-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .contact-form-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 4px solid var(--primary-color);
+            display: inline-block;
+            text-shadow: var(--heading-shadow);
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--button-hover-bg);
+            box-shadow: 0 0 10px var(--button-hover-bg);
+            outline: none;
+        }
+        
+        .contact-form button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-form button:hover {
+            background-color: var(--button-hover-bg);
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+        }
+        /* Footer */
+        
+        footer {
+            background: var(--overlay-color);
+            color: var(--primary-color);
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        /* Animations */
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive */
+        
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+            .banner-text h1 {
+                font-size: 2.5rem;
+            }
+            .banner-text p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .personal-card {
+                width: 90%;
+            }
+            .contact-form {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner-text h1 {
+                font-size: 2rem;
+            }
+            .banner-text p {
+                font-size: 1rem;
+            }
+            .personal-card h3 {
+                font-size: 1.5rem;
+            }
+            .personal-card p,
+            .bio-section p {
+                font-size: 0.95rem;
+            }
+            .contact-form button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Main Navigation">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="GeoStory Logo" loading="lazy" />
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="home-link">Home</a></li>
+                    <li><a href="project-overview.html" class="about-link">Project Overview</a></li>
+                    <li><a href="narrative.html" class="narrative-link">Narrative</a></li>
+                    <li><a href="interactive-map.html" class="map-link">Interactive Map</a></li>
+                    <li><a href="places.html" class="highlights-link">Highlights</a></li>
+                    <li><a href="interconnectivity.html" class="interconnectivity-link">Interconnectivity</a></li>
+                    <li><a href="contact.html" class="contact-link active">Contact</a></li>
+                </ul>
+                <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </button>
+            </div>
+        </nav>
+        <div class="banner" id="contact">
+            <div class="banner-text animate__animated">
+                <h1>Get in Touch</h1>
+                <p>I’d love to hear from you! Whether you have questions about my project, want to discuss geography, or collaborate, feel free to reach out through the options below.</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Introduction Section -->
+        <section class="introduction-section animate__animated">
+            <h2>Get in Touch</h2>
+            <p>I’d love to hear from you! Whether you have questions about my project, want to discuss geography, or collaborate, feel free to reach out through the options below.</p>
+        </section>
+
+        <!-- Personal Information Section -->
+        <section class="personal-info-container animate__animated">
+            <h2>Your Information</h2>
+            <div class="personal-info-section">
+                <!-- Name -->
+                <div class="personal-card">
+                    <h3>
+                        <!-- Example icon (User icon) -->
+                        <svg viewBox="0 0 24 24"><path d="M12 2.25A4.5 4.5 0 0 0 7.5 6.75C7.5 9.008 9.242 10.75 11.5 10.75h1c2.258 0 4-1.742 4-4 0-2.485-2.014-4.5-4.5-4.5zM6.78 12.25c-.13-.002-.26.009-.38.034A4.249 4.249 0 0 0 2.25 16.5v1.5c0 .414.336.75.75.75h18c.414 0 .75-.336.75-.75V16.5c0-1.563-.85-2.942-2.15-3.716-.12-.025-.25-.036-.38-.034H6.78z"></path></svg>                        Name
+                    </h3>
+                    <p>Trevor Wong</p>
+                </div>
+
+                <!-- Email Address -->
+                <div class="personal-card">
+                    <h3>
+                        <!-- Envelope icon -->
+                        <svg viewBox="0 0 24 24"><path d="M20.016 3H3.984C2.888 3 2 3.888 2 4.984v14.033C2 20.113 2.888 21 3.984 21h16.033c1.095 0 1.984-.888 1.984-1.984V4.984C22 3.888 21.113 3 20.016 3zM20 6.384l-7.41 5.446a2.001 2.001 0 0 1-2.182 0L3 6.384v-.4l8.41 6.185a1.001 1.001 0 0 0 1.182 0L21 5.984v.4z"></path></svg>                        Email Address
+                    </h3>
+                    <p><a href="mailto:wongtrevor2003@gmail.com">wongtrevor2003@gmail.com</a></p>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="personal-card">
+                    <h3>
+                        <!-- Phone icon -->
+                        <svg viewBox="0 0 24 24"><path d="M6.585 4.999l.662 2.203c.13.436.01.898-.323 1.23L5.5 9.856c1.262 2.322 3.323 4.383 5.645 5.645l1.425-1.424c.333-.333.795-.452 1.23-.322l2.203.662c.788.237 1.291 1.05 1.098 1.863l-.495 2.16c-.135.59-.693.994-1.306.994-9.94 0-18-8.06-18-18 0-.613.404-1.171.995-1.306l2.16-.495c.813-.193 1.626.31 1.863 1.099z"></path></svg>                        Phone Number
+                    </h3>
+                    <p><a href="tel:+17788921711">+1 (778) 892-1711</a></p>
+                </div>
+
+                <!-- Location -->
+                <div class="personal-card">
+                    <h3>
+                        <!-- Location icon -->
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.673 2 6 4.673 6 8c0 4.367 5.26 10.409 5.512 10.685a.998.998 0 0 0 1.476 0C12.74 18.409 18 12.367 18 8c0-3.327-2.673-6-6-6zm0 8.5A2.5 2.5 0 1 1 14.5 8 2.502 2.502 0 0 1 12 10.5z"></path></svg>                        Location
+                    </h3>
+                    <p>Based in Vancouver, Canada</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Short Bio Section -->
+        <section class="bio-section animate__animated">
+            <h2>About Me</h2>
+            <p>
+                Hi, I’m Trevor Wong, a geography enthusiast and student at Fraser International College. Through my studies, I’ve developed a passion for exploring the interconnectedness of people and places, especially within the context of ecology and sustainability.
+                I strive to understand how natural systems and human activities influence each other and work towards promoting sustainable practices in urban and natural environments.
+            </p>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section animate__animated">
+            <h2>Contact Me</h2>
+            <form class="contact-form" action="#" method="POST" novalidate>
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name" />
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email" />
+                <input type="text" name="subject" placeholder="Subject" aria-label="Subject" />
+                <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Trevor Wong. All Rights Reserved</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="places.html">Places</a>
+            <a href="interconnectivity.html">Interconnectivity</a>
+            <a href="project-overview.html">Project Overview</a>
+            <a href="narrative.html">Narrative</a>
+            <a href="interactive-map.html">Interactive Map</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('#nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+            });
+
+            // Change Nav Background on Scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.nav-container');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for Animations
+            const animatedElements = document.querySelectorAll('.animate__animated');
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
