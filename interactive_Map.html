@@ -5,10 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Map</title>
-    <meta name="description" content="Explore my interactive map." />
+    <meta name="description" content="Explore the interactive map showcasing the geographic connections between Victoria Harbour, Tai Mo Shan, and Mai Po Reserve." />
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- Animate.css for animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Custom Styles -->
     <style>
          :root {
             --navbar-height: 80px;
@@ -24,6 +30,7 @@
             --font-size-small: 1rem;
             --max-content-width: 1200px;
             --heading-shadow: 0px 0px 10px rgba(0, 255, 213, 0.8);
+            --card-hover-transform: rotateY(10deg);
             --card-hover-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
             --button-hover-bg: #00e6b8;
         }
@@ -63,9 +70,8 @@
         
         .nav-container {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            /* Changed from center to space-between */
+            align-items: center;
             padding: 1rem 3rem;
             background: var(--overlay-color);
             position: fixed;
@@ -88,7 +94,6 @@
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
         }
         
         .nav-links a {
@@ -148,32 +153,6 @@
         .hamburger.active .bar3 {
             transform: rotate(45deg) translate(-5px, -6px);
         }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: var(--navbar-height);
-                right: 0;
-                width: 100%;
-                flex-direction: column;
-                background: rgba(0, 0, 0, 0.95);
-                display: none;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height var(--transition-speed) ease;
-                align-items: center;
-                margin: 0;
-            }
-            .nav-links.active {
-                display: flex;
-                max-height: 300px;
-                justify-content: center;
-            }
-            .hamburger {
-                display: flex;
-                margin-left: 1rem;
-            }
-        }
         /* Banner */
         
         .banner {
@@ -181,12 +160,11 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 100vh;
+            height: 60vh;
             margin-top: var(--navbar-height);
             position: relative;
             background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.7));
             overflow: hidden;
-            text-align: center;
         }
         
         .banner::before {
@@ -196,7 +174,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('assets/images/banner-contact.jpg') center/cover no-repeat;
+            background: url('assets/images/banner-map.jpg') center/cover no-repeat;
             filter: brightness(40%) blur(2px);
             z-index: -1;
             transition: filter 0.5s ease;
@@ -225,38 +203,25 @@
         
         .banner-text p {
             font-size: var(--font-size-medium);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             color: var(--secondary-color);
-            line-height: 1.5;
         }
-        /* Main */
+        /* Map Section */
         
-        main {
-            padding: 4rem 2rem;
-            max-width: var(--max-content-width);
-            margin: 0 auto;
-        }
-        
-        .introduction-section,
-        .personal-info-container,
-        .bio-section,
-        .contact-form-section {
+        .map-section {
             background-color: rgba(0, 255, 213, 0.05);
             padding: 4rem 2rem;
-            text-align: center;
-            color: var(--secondary-color);
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             margin-bottom: 4rem;
             animation: fadeInUp 1s ease forwards;
             opacity: 0;
             transform: translateY(20px);
+            max-width: var(--max-content-width);
+            margin: 4rem auto;
         }
         
-        .introduction-section h2,
-        .personal-info-container h2,
-        .bio-section h2,
-        .contact-form-section h2 {
+        .map-section h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.8rem;
             margin-bottom: 1.5rem;
@@ -265,121 +230,96 @@
             display: inline-block;
             text-shadow: var(--heading-shadow);
         }
+        /* Google Map Container */
         
-        .introduction-section p,
-        .bio-section p,
-        .contact-form-section p {
-            font-size: 1.2rem;
-            max-width: 900px;
-            margin: 0 auto;
-            line-height: 1.8;
-            color: var(--secondary-color);
-        }
-        
-        .personal-info-container h2 {
+        .map-container {
+            width: 100%;
+            max-width: 100%;
+            height: 50vh;
+            min-height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
         }
+        /* Details Below the Map */
         
-        .personal-info-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        .map-details {
+            display: flex;
+            flex-wrap: wrap;
             gap: 2rem;
-            justify-items: center;
-            margin-top: 2rem;
+            justify-content: center;
         }
         
-        .personal-card {
+        .map-detail-card {
             background: var(--card-background);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
-            text-align: center;
             color: var(--secondary-color);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             transition: transform 0.6s ease, box-shadow 0.3s ease;
-            width: 100%;
-            max-width: 300px;
-            cursor: pointer;
+            width: 300px;
             position: relative;
+            overflow: hidden;
+            perspective: 1000px;
         }
         
-        .personal-card:hover {
-            transform: translateY(-5px);
+        .map-detail-card:hover {
+            transform: rotateY(10deg);
             box-shadow: var(--card-hover-shadow);
         }
         
-        .personal-card h3 {
+        .map-detail-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(0, 255, 213, 0.3), rgba(0, 255, 213, 0));
+            transition: transform 0.6s ease;
+            z-index: 0;
+        }
+        
+        .map-detail-card:hover::before {
+            transform: rotate(45deg);
+        }
+        
+        .map-detail-card h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             margin-bottom: 1rem;
             color: var(--primary-color);
             text-shadow: var(--heading-shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
         
-        .personal-card h3 svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--primary-color);
-        }
-        
-        .personal-card p {
+        .map-detail-card p {
             font-size: 1rem;
             line-height: 1.6;
             color: #c3f9f2;
+            position: relative;
+            z-index: 1;
         }
         
-        .personal-card p a {
-            color: #c3f9f2;
-            text-decoration: underline;
-        }
-        
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .contact-form input,
-        .contact-form textarea {
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
-            background: transparent;
-            color: var(--secondary-color);
-            font-size: 1rem;
-            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-        }
-        
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: var(--button-hover-bg);
-            box-shadow: 0 0 10px var(--button-hover-bg);
-            outline: none;
-        }
-        
-        .contact-form button {
-            padding: 0.75rem 1.5rem;
+        .map-detail-card a {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
             background-color: var(--primary-color);
             color: var(--background-color);
-            border: none;
             border-radius: 25px;
             font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
             transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
         }
         
-        .contact-form button:hover {
+        .map-detail-card a:hover {
             background-color: var(--button-hover-bg);
             transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
         }
+        /* Footer */
         
         footer {
             background: var(--overlay-color);
@@ -426,6 +366,7 @@
                 transform: translateY(0);
             }
         }
+        /* Responsive */
         
         @media (max-width: 992px) {
             .nav-container {
@@ -434,17 +375,43 @@
             .banner-text h1 {
                 font-size: 2.5rem;
             }
-            .banner-text p {
-                font-size: 1rem;
+            .map-section h2 {
+                font-size: 2.5rem;
+            }
+            .map-container {
+                height: 45vh;
             }
         }
         
         @media (max-width: 768px) {
-            .personal-card {
+            .nav-links {
+                position: absolute;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                display: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--transition-speed) ease;
+            }
+            .nav-links.active {
+                display: flex;
+                max-height: 300px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .map-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            .map-detail-card {
                 width: 90%;
             }
-            .contact-form {
-                width: 100%;
+            .map-container {
+                height: 40vh;
             }
         }
         
@@ -455,15 +422,22 @@
             .banner-text p {
                 font-size: 1rem;
             }
-            .personal-card h3 {
+            .map-section h2 {
+                font-size: 2rem;
+            }
+            .map-detail-card h3 {
                 font-size: 1.5rem;
             }
-            .personal-card p,
-            .bio-section p {
+            .map-detail-card p,
+            .map-section p {
                 font-size: 0.95rem;
             }
-            .contact-form button {
+            .map-detail-card a {
                 font-size: 0.9rem;
+            }
+            .map-container {
+                height: 35vh;
+                min-height: 250px;
             }
         }
     </style>
@@ -477,11 +451,11 @@
                     <img src="GeoStory Logo.jpg" alt="GeoStory Logo" loading="lazy" />
                 </div>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="https://wongtrevor.github.io/GEOG100-/home.html" class="home-link">Home</a></li>
-                    <li><a href="https://wongtrevor.github.io/GEOG100-/place.html" class="highlights-link">The Places</a></li>
-                    <li><a href="https://wongtrevor.github.io/GEOG100-/interconnectivity.html" class="interconnectivity-link">Interconnectivity</a></li>
-                    <li><a href="https://wongtrevor.github.io/GEOG100-/interactive_Map.html" class="map-link active">Interactive Map</a></li>
-                    <li><a href="https://wongtrevor.github.io/GEOG100-/contact.html" class="contact-link">Contact</a></li>
+                    <li><a href="index.html" class="home-link">Home</a></li>
+                    <li><a href="places.html" class="highlights-link">The Places</a></li>
+                    <li><a href="interconnectivity.html" class="interconnectivity-link">Interconnectivity</a></li>
+                    <li><a href="interactive-map.html" class="map-link active">Interactive Map</a></li>
+                    <li><a href="contact.html" class="contact-link">Contact</a></li>
                 </ul>
                 <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
                     <div class="bar1"></div>
@@ -490,7 +464,6 @@
                 </button>
             </div>
         </nav>
-
         <div class="banner" id="interactive-map">
             <div class="banner-text animate__animated">
                 <h1>Exploring the Map of My Geography</h1>
@@ -500,77 +473,51 @@
     </header>
 
     <main>
-        <section class="introduction-section animate__animated">
-            <h2>Get in Touch</h2>
-            <p>I’d love to hear from you! Whether you have questions about my project, want to discuss geography, or collaborate, feel free to reach out through the options below.</p>
-        </section>
-
-        <section class="personal-info-container animate__animated">
-            <h2>Your Information</h2>
-            <div class="personal-info-section">
-                <div class="personal-card">
-                    <h3>
-                        <svg viewBox="0 0 24 24"><path d="M12 2.25A4.5 4.5 0 0 0 7.5 6.75C7.5 9.008 9.242 10.75 11.5 10.75h1c2.258 0 4-1.742 4-4 0-2.485-2.014-4.5-4.5-4.5zM6.78 12.25c-.13-.002-.26.009-.38.034A4.249 4.249 0 0 0 2.25 16.5v1.5c0 .414.336.75.75.75h18c.414 0 .75-.336.75-.75V16.5c0-1.563-.85-2.942-2.15-3.716-.12-.025-.25-.036-.38-.034H6.78z"></path></svg>                        Name
-                    </h3>
-                    <p>Trevor Wong</p>
+        <!-- Map Section -->
+        <section class="map-section animate__animated">
+            <h2>Interactive Map</h2>
+            <div class="map-container">
+                <!-- Embed Google My Maps -->
+                <iframe src="https://www.google.com/maps/d/embed?mid=1JBtFLxMP_BVY52QwXR8pkTO7vJ1fptw&ll=22.36402581569179%2C114.10626884999999&z=12" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+                </iframe>
+            </div>
+            <div class="map-details">
+                <!-- Victoria Harbour -->
+                <div class="map-detail-card">
+                    <h3>Victoria Harbour</h3>
+                    <p>Victoria Harbour is a hub for maritime trade and an iconic symbol of Hong Kong, playing a crucial role in international commerce.</p>
+                    <a href="places.html#victoria-harbour">Learn More</a>
                 </div>
 
-                <div class="personal-card">
-                    <h3>
-                        <svg viewBox="0 0 24 24"><path d="M20.016 3H3.984C2.888 3 2 3.888 2 4.984v14.033C2 20.113 2.888 21 3.984 21h16.033c1.095 0 1.984-.888 1.984-1.984V4.984C22 3.888 21.113 3 20.016 3zM20 6.384l-7.41 5.446a2.001 2.001 0 0 1-2.182 0L3 6.384v-.4l8.41 6.185a1.001 1.001 0 0 0 1.182 0L21 5.984v.4z"></path></svg>                        Email Address
-                    </h3>
-                    <p><a href="mailto:wongtrevor2003@gmail.com">wongtrevor2003@gmail.com</a></p>
+                <!-- Tai Mo Shan -->
+                <div class="map-detail-card">
+                    <h3>Tai Mo Shan</h3>
+                    <p>Tai Mo Shan, the highest peak in Hong Kong, is renowned for its diverse ecosystems and endemic species.</p>
+                    <a href="places.html#tai-mo-shan">Learn More</a>
                 </div>
 
-                <div class="personal-card">
-                    <h3>
-                        <svg viewBox="0 0 24 24"><path d="M6.585 4.999l.662 2.203c.13.436.01.898-.323 1.23L5.5 9.856c1.262 2.322 3.323 4.383 5.645 5.645l1.425-1.424c.333-.333.795-.452 1.23-.322l2.203.662c.788.237 1.291 1.05 1.098 1.863l-.495 2.16c-.135.59-.693.994-1.306.994-9.94 0-18-8.06-18-18 0-.613.404-1.171.995-1.306l2.16-.495c.813-.193 1.626.31 1.863 1.099z"></path></svg>                        Phone Number
-                    </h3>
-                    <p><a href="tel:+17788921711">+1 (778) 892-1711</a></p>
-                </div>
-
-                <div class="personal-card">
-                    <h3>
-                        <svg viewBox="0 0 24 24"><path d="M12 2C8.673 2 6 4.673 6 8c0 4.367 5.26 10.409 5.512 10.685a.998.998 0 0 0 1.476 0C12.74 18.409 18 12.367 18 8c0-3.327-2.673-6-6-6zm0 8.5A2.5 2.5 0 1 1 14.5 8 2.502 2.502 0 0 1 12 10.5z"></path></svg>                        Location
-                    </h3>
-                    <p>Based in Vancouver, Canada</p>
+                <!-- Mai Po Reserve -->
+                <div class="map-detail-card">
+                    <h3>Mai Po Reserve</h3>
+                    <p>Mai Po Reserve is a critical wetland habitat for migratory birds, emphasizing the importance of ecological conservation.</p>
+                    <a href="places.html#mai-po-reserve">Learn More</a>
                 </div>
             </div>
-        </section>
-
-        <section class="bio-section animate__animated">
-            <h2>About Me</h2>
-            <p>
-                Hi, I’m Trevor Wong, a geography enthusiast and student at Fraser International College. Through my studies, I’ve developed a passion for exploring the interconnectedness of people and places, especially within the context of ecology and sustainability.
-                I strive to understand how natural systems and human activities influence each other and work towards promoting sustainable practices in urban and natural environments.
-            </p>
-        </section>
-
-        <section class="contact-form-section animate__animated">
-            <h2>Contact Me</h2>
-            <form class="contact-form" action="#" method="POST" novalidate>
-                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name" />
-                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email" />
-                <input type="text" name="subject" placeholder="Subject" aria-label="Subject" />
-                <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
-                <button type="submit">Send Message</button>
-            </form>
         </section>
     </main>
 
     <footer>
-        <p>© 2024 Trevor Wong. All Rights Reserved</p>
+        <p>© 2024 Your Name. All Rights Reserved</p>
         <div class="footer-links">
             <a href="index.html">Home</a>
-            <a href="places.html">Places</a>
+            <a href="places.html">The Places</a>
             <a href="interconnectivity.html">Interconnectivity</a>
-            <a href="project-overview.html">Project Overview</a>
-            <a href="narrative.html">Narrative</a>
             <a href="interactive-map.html">Interactive Map</a>
             <a href="contact.html">Contact</a>
         </div>
     </footer>
 
+    <!-- Custom Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Hamburger Menu Toggle
@@ -596,6 +543,7 @@
 
             // Intersection Observer for Animations
             const animatedElements = document.querySelectorAll('.animate__animated');
+
             const observerOptions = {
                 threshold: 0.1
             };
